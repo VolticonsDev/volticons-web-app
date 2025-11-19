@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🚨 REEMPLAZA EL CÓDIGO DE TU index.css CON ESTO */
+body {
+  /* Establece el fondo y el color de texto global */
+  @apply bg-dark-bg text-light min-h-screen font-volt-sans;
+  
+  /* 🖼️ Configuración de la imagen de textura */
+  background-image: url('/background.png'); 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-attachment: fixed; /* Mantiene la imagen fija */
+  background-position: center;
+  
+  /* ❌ ELIMINADO: background-blend-mode y filter: brightness */
+}
+
+.active-tab-btn {
+  @apply border-b-4 border-volt-orange text-volt-orange;
+}
+
+.section-title {
+  @apply text-4xl font-bold mb-4 inline-block relative pb-2 text-light; 
+}
+
+.section-title::after {
+  content: ''; 
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  width: 70%;
+  height: 4px;
+  background-color: #EA580C; 
+  border-radius: 2px;
+}
