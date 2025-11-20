@@ -10,7 +10,7 @@ export default async function (req, res) {
     }
 
     try {
-        const result = await dbQuery('SELECT id, name, baseprice, imageurl, purchaseurl, stock FROM shop_products ORDER BY id ASC'); 
+        const result = await dbQuery('SELECT id, name, baseprice, imageurl, purchaseurl, stock, category FROM shop_products ORDER BY id ASC'); 
         
         const productCount = result.rows ? result.rows.length : 0;
         
@@ -20,7 +20,8 @@ export default async function (req, res) {
             basePrice: product.baseprice,  
             imageUrl: product.imageurl,    
             purchaseUrl: product.purchaseurl,
-            stock: product.stock 
+            stock: product.stock, 
+            category: product.category
         }));
         
         res.status(200).json({ 

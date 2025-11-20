@@ -2,13 +2,13 @@ import React from 'react';
 
 const TeamFilter = ({ categories, selectedCategory, onSelectCategory }) => {
   return (
-    <div className="flex flex-wrap gap-3 p-4 bg-header-bg rounded-lg shadow-xl mb-8 justify-center border border-volt-violet">
+    <div className="flex flex-wrap gap-3 p-4 rounded-lg shadow-xxl mb-8 justify-center ">
       <button
         onClick={() => onSelectCategory('All')}
-        className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
+        className={`px-4 py-2 rounded-full text-sm\ font-bold transition-all duration-200 ${
           selectedCategory === 'All'
             ? 'bg-volt-orange text-dark shadow-md shadow-volt-orange/50'
-            : 'bg-dark-bg text-gray-300 hover:bg-volt-violet'
+            : ' text-gray-300 hover:bg-volt-violet'
         }`}
       >
         Todos los Partidos
@@ -18,10 +18,10 @@ const TeamFilter = ({ categories, selectedCategory, onSelectCategory }) => {
         <button
           key={category}
           onClick={() => onSelectCategory(category)}
-          className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
+          className={`px-4 py-2 rounded-full text-xl font-bold transition-all duration-200 ${
             selectedCategory === category
               ? 'bg-volt-orange text-dark shadow-md shadow-volt-orange/50'
-              : 'bg-dark-bg text-gray-300 hover:bg-volt-violet'
+              : ' text-gray-300 hover:bg-volt-violet'
           }`}
         >
           {category}

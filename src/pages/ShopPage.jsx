@@ -1,19 +1,26 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Footer from '../components/Footer'; 
 import ShopItemCard from '../components/ShopitemCard';
-import TeamFilter from '../components/CategoryFilter';
+import SidebarFilter from '../components/SidebarFilter'; 
 
 function ShopPage() {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedCategory, setSelectedCategory] = useState('All'); 
+    const [filters, setFilters] = useState({ category: 'All', sort: 'default' });
 
+    const handleFilterChange = (key, value) => {
+        setFilters(prev => ({ ...prev, [key]: value }));
+    };
+    
     const loadProducts = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('/api/shop-products');
+            const queryParams = new URLSearchParams(filters).toString();
+            const response = await fetch(`/api/shop-products?${queryParams}`);
+            
             if (!response.ok) { throw new Error('Fallo al obtener productos de la API.'); }
             const data = await response.json();
+            
             if (data.success && data.products) {
                 setProducts(data.products);
             }
@@ -26,66 +33,64 @@ function ShopPage() {
     
     useEffect(() => {
         loadProducts();
-    }, []);
+    }, [filters]); 
 
 
     const allCategories = useMemo(() => {
-        const categories = products.map(p => p.category).filter(Boolean); 
+        const categories = products.map(p => p.category).filter(Boolean);
         return ['All', ...new Set(categories)];
     }, [products]);
-
-    const filteredProducts = useMemo(() => {
-        if (selectedCategory === 'All') {
-            return products;
-        }
-        return products.filter(p => p.category === selectedCategory);
-    }, [products, selectedCategory]);
-
+    
 
     return (
         <div className="min-h-screen flex flex-col pt-20">
-            <main className="flex-grow max-w-7xl mx-auto py-20 px-5 text-center">
+            <main className="flex-grow max-w-7xl mx-auto py-20 px-5">
                 
-                <h1 className="section-title text-4xl font-extrabold mb-12 inline-block relative border-volt-accent pb-2"
+                <h1 className="section-title text-4xl font-extrabold mb-12 text-center"
                     data-aos="fade-down"
                 >
-                     TIENDA OFICIAL VOLTICONS
+                   TIENDA 
                 </h1>
+                
+                <div className="flex">
+                    
+                    {!isLoading && products.length > 0 && (
+                        <div className="w-1/4 pr-8 hidden md:block">
+                            <SidebarFilter 
+                                categories={allCategories}
+                                filters={filters} 
+                                onFilterChange={handleFilterChange} 
+                            />
+                        </div>
+                    )}
 
-                {!isLoading && products.length > 0 && (
-                    <div className="mb-12">
-                        <TeamFilter 
-                            categories={allCategories} 
-                            selectedCategory={selectedCategory}
-                            onSelectCategory={setSelectedCategory} 
-                        />
-                    </div>
-                )}
+                    <div className="w-full md:w-3/4 text-center">
 
-
-                {isLoading ? (
-                    <p className="text-light text-xl mt-10">Cargando catálogo...</p>
-                ) : filteredProducts.length === 0 ? ( 
-                    <p className="text-light text-xl mt-10">No hay productos en esta categoría.</p>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                        {filteredProducts.map((product, index) => ( 
-                            <div
-                                key={product.id}
-                                data-aos="fade-up" 
-                                data-aos-delay={index * 100} 
-                            >
-                                <ShopItemCard 
-                                    name={product.name} 
-                                    price={`$U ${product.basePrice.toFixed(2)}`} 
-                                    imageUrl={product.imageUrl}     
-                                    purchaseUrl={product.purchaseUrl} 
-                                    stock={product.stock}
-                                />
+                        {isLoading ? (
+                            <p className="text-light text-xl mt-10">Cargando catálogo...</p>
+                        ) : products.length === 0 ? (
+                            <p className="text-light text-xl mt-10">No hay productos disponibles.</p>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto"> 
+                                {products.map((product, index) => ( 
+                                    <div
+                                        key={product.id}
+                                        data-aos="fade-up" 
+                                        data-aos-delay={index * 100} 
+                                    >
+                                        <ShopItemCard 
+                                            name={product.name} 
+                                            price={`$U ${product.basePrice.toFixed(2)}`} 
+                                            imageUrl={product.imageUrl} 
+                                            purchaseUrl={product.purchaseUrl} 
+                                            stock={product.stock}
+                                        />
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        )}
                     </div>
-                )}
+                </div>
 
             </main>
             <Footer />
