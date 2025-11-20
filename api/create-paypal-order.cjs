@@ -1,14 +1,6 @@
-/* PAGOS CON PAYPAL DESACTIVADOS TEMPORALMENTE
-    
-    PARA ACTIVAR LA TIENDA:
-    1. En Vercel: Ve a 'Environment Variables' y cambia VITE_MERCH_ACTIVE a 'true'.
-    2. En este archivo: Elimina este gran comentario de bloque   que envuelve el cuerpo de la función principal.
-    3. En ShopItemCard.jsx: Descomenta el bloque de la función 'handleCheckout'.
-*/
-
 const paypal = require('@paypal/paypal-server-sdk');
 
-// NOTA: Para producción (LIVE), debes cambiar 'SandboxEnvironment' por 'LiveEnvironment'
+// cambiar 'SandboxEnvironment' por 'LiveEnvironment'
 const environment = new paypal.core.SandboxEnvironment(
     process.env.PAYPAL_CLIENT_ID,
     process.env.PAYPAL_CLIENT_SECRET
@@ -28,8 +20,6 @@ module.exports = async (req, res) => {
     if (req.method !== 'POST') {
         return res.status(405).end();
     }
-    
-    //  INTERRUPTOR DE ACTIVACIÓN: Si es false, devolvemos un 403.
     if (process.env.VITE_MERCH_ACTIVE !== 'true') {
         return res.status(403).json({ 
             error: 'La tienda aún no está activa para pagos. Vuelve en Enero/Febrero.' 

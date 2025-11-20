@@ -2,19 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 🚨 REEMPLAZA EL CÓDIGO DE TU index.css CON ESTO */
 body {
-  /* Establece el fondo y el color de texto global */
   @apply bg-dark-bg text-light min-h-screen font-volt-sans;
   
-  /* 🖼️ Configuración de la imagen de textura */
   background-image: url('/background.png'); 
   background-repeat: no-repeat; 
   background-size: cover; 
-  background-attachment: fixed; /* Mantiene la imagen fija */
+  background-attachment: fixed; 
   background-position: center;
-  
-  /* ❌ ELIMINADO: background-blend-mode y filter: brightness */
 }
 
 .active-tab-btn {

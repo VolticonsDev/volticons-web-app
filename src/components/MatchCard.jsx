@@ -1,10 +1,8 @@
-// src/components/MatchCard.jsx
 import React from 'react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale'; 
-import { FaMapMarkerAlt, FaRegCalendarAlt } from 'react-icons/fa'; // Asegúrate de importar FaRegCalendarAlt si lo usas
+import { FaMapMarkerAlt, FaRegCalendarAlt } from 'react-icons/fa';
 
-// Componente para mostrar la cuenta regresiva.
 const CountdownDisplay = ({ time }) => (
   <div className="flex justify-center space-x-4 mt-2">
     {Object.entries(time).map(([unit, value]) => (
@@ -21,7 +19,6 @@ const CountdownDisplay = ({ time }) => (
 const MatchCard = ({ match, showCountdown = false, countdownTime }) => {
   const { teamHome, teamAway, league, date, location, teamLogoHome, teamLogoAway, category } = match;
 
-  // Formato de fecha en español
   const formattedDate = format(new Date(date), "EEEE, d 'de' MMMM, HH:mm", { locale: es });
 
   return (
@@ -43,7 +40,6 @@ const MatchCard = ({ match, showCountdown = false, countdownTime }) => {
           <p className="text-light text-lg font-bold text-center truncate">{teamHome}</p>
         </div>
 
-        {/* VS Central / Cuenta Regresiva */}
         <div className="w-1/3 flex flex-col items-center">
           <span className="text-4xl font-black text-volt-violet italic">VS</span>
           {showCountdown && countdownTime ? (
@@ -59,7 +55,6 @@ const MatchCard = ({ match, showCountdown = false, countdownTime }) => {
         </div>
       </div>
 
-      {/* Información del Evento */}
       <div className="mt-4 pt-3 border-t border-gray-700">
         <p className="text-center text-sm font-medium text-gray-300 flex items-center justify-center">
           <FaRegCalendarAlt className="mr-2 text-volt-orange" /> {formattedDate}
@@ -69,7 +64,6 @@ const MatchCard = ({ match, showCountdown = false, countdownTime }) => {
         </p>
       </div>
       
-      {/* Botón de acción */}
       <button className="w-full mt-4 py-2 bg-volt-orange text-dark font-bold rounded-lg hover:bg-volt-violet transition-colors duration-200 shadow-lg">
           Ver Detalles
       </button>

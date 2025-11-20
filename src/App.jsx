@@ -1,6 +1,6 @@
 import HomePage from './pages/HomePage.jsx';
 import NewsPage from './pages/NewsPage.jsx';
-//import TeamsPage from './pages/TeamsPage'; // Mantenemos TeamsPage por ahora, aunque no se usa en el router
+//import TeamsPage from './pages/TeamsPage';
 import ShopPage from './pages/ShopPage.jsx';
 import NewsDetailPage from './pages/NewsDetailPage.jsx'; 
 import Header from './components/Header.jsx';
