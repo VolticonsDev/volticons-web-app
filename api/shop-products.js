@@ -38,8 +38,7 @@ export default async function (req, res) {
         res.status(500).json({ 
             success: false, 
             error: 'Fallo la consulta a la Base de Datos.', 
-            details: error.message,
-            sql_state: error.code
+            details: error.message
         });
     }
 }
