@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react'; 
 import Footer from '../components/Footer'; 
 import ShopItemCard from '../components/ShopitemCard';
 import SidebarFilter from '../components/SidebarFilter'; 
@@ -9,7 +9,7 @@ function ShopPage() {
     const [filters, setFilters] = useState({ category: 'All', sort: 'default' });
 
     const handleFilterChange = (key, value) => {
-        setFilters(prev => ({ ...prev, [key]: value }));
+        setFilters(prev => ({ ...prev, [key]: value })); 
     };
     
     const loadProducts = async () => {
@@ -40,7 +40,7 @@ function ShopPage() {
         const categories = products.map(p => p.category).filter(Boolean);
         return ['All', ...new Set(categories)];
     }, [products]);
-    
+
 
     return (
         <div className="min-h-screen flex flex-col pt-20">
@@ -49,21 +49,20 @@ function ShopPage() {
                 <h1 className="section-title text-4xl font-extrabold mb-12 text-center"
                     data-aos="fade-down"
                 >
-                   TIENDA 
+                    🛍️ TIENDA OFICIAL VOLTICONS
                 </h1>
                 
                 <div className="flex">
                     
                     {!isLoading && products.length > 0 && (
-                        <div className="w-1/4 pr-8 hidden md:block">
+                        <div className="w-full sm:w-1/4 pr-8 hidden md:block"> 
                             <SidebarFilter 
                                 categories={allCategories}
-                                filters={filters} 
+                                filters={filters}
                                 onFilterChange={handleFilterChange} 
                             />
                         </div>
                     )}
-
                     <div className="w-full md:w-3/4 text-center">
 
                         {isLoading ? (
@@ -80,7 +79,7 @@ function ShopPage() {
                                     >
                                         <ShopItemCard 
                                             name={product.name} 
-                                            price={`$U ${product.basePrice.toFixed(2)}`} 
+                                            price={`$U ${parseFloat(product.basePrice).toFixed(2)}`} 
                                             imageUrl={product.imageUrl} 
                                             purchaseUrl={product.purchaseUrl} 
                                             stock={product.stock}
