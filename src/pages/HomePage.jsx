@@ -8,8 +8,8 @@ const HomePage = () => {
   return (
     <div className="home-page flex flex-col min-h-screen">
       <main className="flex-grow">
-        <ShopPreviewSection /> 
         <NewsPreviewSection />
+        <ShopPreviewSection /> 
       </main>
       <Footer /> 
     </div>
