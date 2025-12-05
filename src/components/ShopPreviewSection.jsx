@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ShopItemCard from './ShopitemCard';
 
+
 const ShopPreviewSection = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -24,11 +25,11 @@ const ShopPreviewSection = () => {
         loadProducts();
     }, []);
 
-    const previewProduct = [...products].reverse().slice(0, 2);
+    const previewItems = [...products].reverse().slice(0, 2);
 
 
     return (
-        <section id="shop-preview" className="py-20 px-5 text-center text-light animate-fade-in-up"> 
+        <section id="shop-preview" className="py-20 px-5 text-center  text-light animate-fade-in-up"> 
             
             <h2 className="section-title text-3xl font-extrabold mb-8 inline-block relative text-light" data-aos="fade-up"> 
                 ☕ ÚLTIMAS ADICIONES
@@ -36,7 +37,7 @@ const ShopPreviewSection = () => {
             
             {isLoading ? (
                 <p className="text-light text-xl mt-10">Cargando ofertas...</p>
-            ) : previewProduct.length === 0 ? (
+            ) : previewItems.length === 0 ? (
                  <p className="text-light mb-12 text-lg">
                     No hay productos disponibles actualmente.
                 </p>
@@ -46,7 +47,7 @@ const ShopPreviewSection = () => {
                         ¡Descubre nuestra nueva línea de jerseys y accesorios exclusivos por tiempo limitado!
                     </p>
                     <div className="flex justify-center gap-8 mb-12">
-                        {previewProduct.map((product, index) => (
+                        {previewItems.map((item, index) => (
                             <div 
                                 key={item.id}
                                 data-aos="zoom-in"
@@ -55,9 +56,9 @@ const ShopPreviewSection = () => {
                                 <ShopItemCard
                                     name={item.name} 
                                     price={`$U ${parseFloat(product.basePrice).toFixed(2)}`} 
-                                    imageUrl={product.imageurl}
-                                    purchaseUrl={product.purchaseurl}
-                                    stock={product.stock}
+                                    imageUrl={item.imageurl}
+                                    purchaseUrl={item.purchaseurl}
+                                    stock={item.stock}
                                 />
                             </div>
                         ))}
