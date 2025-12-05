@@ -28,7 +28,7 @@ const ShopPreviewSection = () => {
 
 
     return (
-        <section id="shop-preview" className="py-20 px-5 text-center bg-dark-bg text-light animate-fade-in-up"> 
+        <section id="shop-preview" className="py-20 px-5 text-center text-light animate-fade-in-up"> 
             
             <h2 className="section-title text-3xl font-extrabold mb-8 inline-block relative text-light" data-aos="fade-up"> 
                 ☕ ÚLTIMAS ADICIONES
@@ -54,7 +54,7 @@ const ShopPreviewSection = () => {
                             >
                                 <ShopItemCard
                                     name={item.name} 
-                                    price={`$U ${parseFloat(item.baseprice).toFixed(2)}`} 
+                                    price={`$U ${parseFloat(product.basePrice).toFixed(2)}`} 
                                     imageUrl={item.imageurl}
                                     purchaseUrl={item.purchaseurl}
                                     stock={item.stock}
